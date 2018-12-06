@@ -1,0 +1,23 @@
+#{extends 'BackController/template.html'/}
+#{set title:'Gestion des produits'/}
+
+<div class="col-sm-3">
+    <div class="card">
+        <div class="card-body">
+            <a href="@{BackController.formulaireProduit()}">
+                <h5 class="card-title">Ajouter un produit</h5>
+            </a>
+        </div>
+    </div>
+</div>
+
+#{list produits, as:'produit'}
+<div class="col-sm-3">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><strong>${produit.nom}</strong> ${ produit.prix.formatCurrency('EUR').raw() }</h5>
+            <p class="card-text">${produit.description}</p>
+        </div>
+    </div>
+</div>
+#{/list}
