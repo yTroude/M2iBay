@@ -1,7 +1,11 @@
 package models;
 
-public class Utilisateur {
-    public String uuid;
+import util.UUIDModel;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Utilisateur extends UUIDModel {
     public String nom;
     public String prenom;
     public String email;

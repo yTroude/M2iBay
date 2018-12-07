@@ -3,15 +3,11 @@ package controllers;
 import models.Commande;
 import models.Produit;
 import models.Utilisateur;
-import play.libs.Codec;
 import play.mvc.Controller;
 import play.mvc.With;
-import services.CommandeService;
-import services.ProduitService;
-import services.UtilisateurService;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @With(Secure.class)
 public class BackController extends Controller {
@@ -19,16 +15,16 @@ public class BackController extends Controller {
         render();
     }
     public static void commandes(){
-        List<Commande> commandes = CommandeService.INSTANCE.findAllCommandes();
+        List<Commande> commandes = Commande.findAll();
         render(commandes);
     }
     public static void produits(){
-        List<Produit> produits = ProduitService.INSTANCE.findAllProduits();
+        List<Produit> produits = Produit.findAll();
         render(produits);
 
     }
     public static void utilisateurs(){
-        List<Utilisateur> utilisateurs = UtilisateurService.INSTANCE.findAllUtilisateurs();
+        List<Utilisateur> utilisateurs = Utilisateur.findAll();
         render(utilisateurs);
     }
     public static void formulaireProduit(){
@@ -44,13 +40,20 @@ public class BackController extends Controller {
             validation.keep();
             formulaireProduit();
         }
-        produit.uuid = Codec.UUID();
-        ProduitService.INSTANCE.addProduit(produit);
-        BackController.produits();
+        produit.save();
+        produits();
     }
 
     public static void detailCommande(String uuid){
-        Commande commande = CommandeService.INSTANCE.findCommandeByUuid(uuid);
+        Commande commande = Commande.findById(uuid);
+
         render(commande);
+    }
+
+    public static void detailUtilisateur(String uuid){
+        Utilisateur utilisateur = Utilisateur.findById(uuid);
+        List<Commande> commandes = Commande.findAll();
+        commandes = commandes.stream().filter(c->c.utilisateur.equals(utilisateur)).collect(Collectors.toList());
+        render(utilisateur,commandes);
     }
 }

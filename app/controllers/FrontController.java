@@ -1,19 +1,24 @@
 package controllers;
 
-import play.*;
 import play.mvc.*;
 
 import java.util.*;
 
 import models.*;
-import services.ProduitService;
 
 public class FrontController extends Controller {
 
     public static void index() {
 
-        List<Produit> produits = ProduitService.INSTANCE.findAllProduits();
+        List<Produit> produits = Produit.findAll();
         render(produits);
     }
 
+    public static void afficherPanier(){
+
+    }
+    public static void detailProduit(String produitUuid){
+        Produit produit = Produit.findById(produitUuid);
+        render(produit);
+    }
 }

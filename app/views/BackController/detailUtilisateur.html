@@ -1,0 +1,13 @@
+#{extends 'BackController/template.html'/}
+#{set title=utilisateur.prenom + ' ' + utilisateur.nom /}
+
+<div class="col">
+    <h3>${utilisateur.prenom} ${utilisateur.nom}</h3>
+    <p>${utilisateur.email}</p>
+    <h5>Commandes :</h5>
+    <ul>
+        #{list commandes, as:'commande'}
+        <li><a href="@{BackController.detailCommande(commande.uuid)}">${commande.uuid}</a> : ${commande.getTotal().formatCurrency('EUR').raw()} le ${commande.date.format('dd/MM/yyyy')} à ${commande.date.format('HH:mm')}</li>
+        #{/list}
+    </ul>
+</div>

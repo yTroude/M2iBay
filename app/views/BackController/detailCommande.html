@@ -1,1 +1,13 @@
 #{extends 'BackController/template.html'/}
+#{set title:'Détail Commande n°'+commande.uuid/}
+
+<div class="col">
+    <h3>Commande n°${commande.uuid}</h3>
+    <h5>Effectuée le ${commande.date.format('dd/MM/yyyy à HH:mm')} par ${commande.utilisateur.prenom} ${commande.utilisateur.nom}</h5>
+    <ul>
+        #{list commande.commandeProduits, as:'cp'}
+        <li><strong>${cp.produit.nom}</strong> x${cp.quantite} : ${(cp.produit.prix*cp.quantite).formatCurrency('EUR').raw()}</li>
+        #{/list}
+    </ul>
+    <p><strong>Total : </strong>${commande.getTotal().formatCurrency('EUR').raw()}</p>
+</div>

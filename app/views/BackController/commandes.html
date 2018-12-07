@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <a href="@{BackController.detailCommande(commande.uuid)}"><h5 class="card-title">${commande.utilisateur.prenom} ${commande.utilisateur.nom} </h5></a>
-            <p class="card-text">${commande.date.format('dd/MM/yyyy')}</p>
+            <p class="card-text">${commande.date.format()}</p>
         </div>
     </div>
 </div>

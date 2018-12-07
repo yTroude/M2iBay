@@ -4,12 +4,15 @@
 
 # Home page
 GET     /                                       FrontController.index
+GET     /produit/{uuid}/detail                  FrontController.detailProduit
+GET     /panier                                 FrontController.afficherPanier
 GET     /admin                                  BackController.index
 GET     /admin/utilisateurs                     BackController.utilisateurs
+GET     /admin/utilisateurs/{uuid}/detail       BackController.detailUtilisateur
 GET     /admin/produits                         BackController.produits
 POST    /admin/produits                         BackController.creerProduit
 GET     /admin/commandes                        BackController.commandes
-GET     /admin/{uuid}/detail                    BackController.detailCommande
+GET     /admin/commandes/{uuid}/detail          BackController.detailCommande
 GET     /admin/produits/nouveau                 BackController.formulaireProduit
 
 # Ignore favicon requests

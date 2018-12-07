@@ -1,25 +1,66 @@
 package models;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import play.Logger;
+import util.UUIDModel;
 
-public class Commande {
-    public String uuid;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import java.util.*;
+
+@Entity
+public class Commande extends UUIDModel {
+    @OneToOne
     public Utilisateur utilisateur;
-    public Map<Produit, Integer> produits;
+
+    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
+    public Set<CommandeProduit> commandeProduits;
+
     public Date date;
 
     public void addProduit(Produit produit, Integer quantite){
-        if (produits==null){
-            produits=new HashMap<>();
-        }
-        if (produits.containsKey(produit)){
-            produits.replace(produit, produits.get(produit)+quantite);
+        CommandeProduit cp = findCommandeProduit(produit);
+        if(cp!=null) {
+            cp.quantite += quantite;
         }
         else {
-            produits.put(produit,quantite);
+            commandeProduits.add(new CommandeProduit(this, produit, quantite));
+
         }
     }
+
+    public void updateProduit (Produit produit, Integer quantite){
+        CommandeProduit cp = findCommandeProduit(produit);
+        if(cp!=null) {
+            cp.quantite=quantite;
+        }
+        else {
+            commandeProduits.add(new CommandeProduit(this,produit,quantite));
+        }
+    }
+
+    public double getTotal(){
+        double total = 0;
+        for(CommandeProduit cp : commandeProduits){
+            total+= cp.quantite*cp.produit.prix;
+        }
+
+        return total;
+    }
+
+    public CommandeProduit findCommandeProduit(Produit produit){
+        if(commandeProduits == null){
+            Logger.debug("commandeProduits is null");
+            commandeProduits = new HashSet<>();
+        }
+        for (CommandeProduit cp: commandeProduits){
+            if (cp.produit.equals(produit)){
+                return cp;
+            }
+        }
+        Logger.debug("No commandeProduit found for "+produit.nom);
+        return null;
+    }
+
 }

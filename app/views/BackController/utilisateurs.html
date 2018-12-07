@@ -4,7 +4,7 @@
 <div class="col-sm-3">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">${utilisateur.nom} ${utilisateur.prenom}</h5>
+            <h5 class="card-title"><a href="@{BackController.detailUtilisateur(utilisateur.uuid)}">${utilisateur.nom} ${utilisateur.prenom}</a></h5>
             <p class="card-text">${utilisateur.email}</p>
         </div>
     </div>
