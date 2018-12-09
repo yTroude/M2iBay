@@ -1,11 +1,13 @@
 package jobs;
 
 import models.Commande;
+import models.Panier;
 import models.Produit;
 import models.Utilisateur;
 import play.Play;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
+import services.PanierService;
 
 import java.time.Instant;
 import java.util.Date;
@@ -41,5 +43,7 @@ public class BootstrapJob extends Job {
                 commande.save();
             }
         }
+
+        PanierService.INSTANCE.initialize();
     }
 }

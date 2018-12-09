@@ -26,14 +26,12 @@ public class Panier {
             else throw(new IndexOutOfBoundsException());
 
         }
-        else throw(new NotFoundException("Le produit "+produit.uuid+" n'existe pas dans le panier "+uuid+"."));
+
     }
 
     public void removeProduit(String produitUuid){
         Produit produit = Produit.findById(produitUuid);
         produits.remove(produit);
-    }
-    public void updateQuantite(Produit produit, Integer quantite){
     }
 
 
