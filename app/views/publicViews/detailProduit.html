@@ -1,10 +1,10 @@
-#{extends 'FrontController/template.html'/}
+#{extends 'publicViews/template.html'/}
 #{set title:produit.nom/}
 
 <div class="col">
     <h2>${produit.nom}</h2>
     <p>${produit.description}</p>
-    <form method="post" action="@{FrontController.addToPanier()}">
+    <form method="post" action="@{publicControllers.PublicPanier.addToPanier()}">
         <div class="form-group">
             <label for="quantite">Quantité</label>
             <input type="number" name="quantite" id="quantite" min="0">

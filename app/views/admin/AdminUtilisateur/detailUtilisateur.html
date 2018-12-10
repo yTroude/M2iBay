@@ -1,4 +1,4 @@
-#{extends 'BackController/template.html'/}
+#{extends 'admin/template.html'/}
 #{set title=utilisateur.prenom + ' ' + utilisateur.nom /}
 
 <div class="col">
@@ -7,7 +7,7 @@
     <h5>Commandes :</h5>
     <ul>
         #{list commandes, as:'commande'}
-        <li><a href="@{BackController.detailCommande(commande.uuid)}">${commande.uuid}</a> : ${commande.getTotal().formatCurrency('EUR').raw()} le ${commande.date.format('dd/MM/yyyy')} à ${commande.date.format('HH:mm')}</li>
+        <li><a href="@{admin.AdminCommande.detailCommande(commande.uuid)}">${commande.uuid}</a> : ${commande.getTotal().formatCurrency('EUR').raw()} le ${commande.date.format('dd/MM/yyyy')} à ${commande.date.format('HH:mm')}</li>
         #{/list}
     </ul>
 </div>

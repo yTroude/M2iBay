@@ -1,10 +1,10 @@
-#{extends 'BackController/template.html'/}
+#{extends 'admin/template.html'/}
 #{set title:'Gestion des produits'/}
 
 <div class="col-sm-3">
     <div class="card">
         <div class="card-body">
-            <a href="@{BackController.formulaireProduit()}">
+            <a href="@{admin.AdminProduit.formulaireProduit()}">
                 <h5 class="card-title">Ajouter un produit</h5>
             </a>
         </div>

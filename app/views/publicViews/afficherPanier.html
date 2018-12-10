@@ -1,0 +1,38 @@
+#{extends 'publicViews/template.html'/}
+#{set title:'Panier'/}
+<div class="col">
+
+#{if panier==null}
+    <h1>Il n'y a rien ici</h1>
+    <h5>Ajoutez des articles à votre panier pour commencer.</h5>
+    <p><a href="@{publicControllers.Public.index()}">Retour à la liste des produits.</a></p>
+#{/if}
+
+#{else }
+    #{list panier.produits.keySet(), as:'produit'}
+        <div class="col">
+            <div class="card">
+                <h5><a href="@{publicControllers.Public.detailProduit(produit.u)}">${produit.nom}</a>
+                    : ${produit.prix.formatCurrency('EUR').raw()}</h5>
+                <form action="@{publicControllers.PublicPanier.updateQuantitePanier()}" method="post">
+                    <div class="form-group">
+                        <input type="number" name="quantite" id="quantite" min="0"
+                               value="${panier.produits.get(produit)}">
+                        <input type="hidden" name="produitUUID" value="${produit.uuid}">
+                        <input type="submit" class="btn btn-primary" value="Mettre à jour">
+                        <span></span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    #{/list}
+    <p>
+        <strong>Total</strong> (${panier.produits.values().sum()} articles)
+        : ${panier.getTotal().formatCurrency('EUR').raw()}
+    </p>
+    <p>
+        <a class="btn-primary btn" href="">Finaliser la commande</a>
+    </p>
+#{/else}
+</div>

@@ -1,0 +1,43 @@
+Utilisateur(admin):
+  nom: admin
+  prenom: admin
+  email: admin
+  password: admin
+  profile: administrator
+Utilisateur(johndoe):
+  nom: Doe
+  prenom: John
+  email: john-doe@mail.com
+  password: mypass
+  profile: user
+Utilisateur(jeanbon):
+  nom: Bon
+  prenom: Jean
+  email: jean-bon@mail.com
+  password: hunter2
+  profile: user
+Produit(tartiflette):
+  nom: Tartiflette
+  description: C'est super bon.
+  prix: 12.34
+Produit(raclette):
+  nom: Raclette
+  description: C'est méga bon.
+  prix: 56.78
+Produit(racliflette):
+  nom: Racliflette
+  description: Deux fois plus de gras, deux fois plus de plaisir.
+  prix: 91.23
+
+Commande(jeanboncommande):
+  utilisateur: jeanbon
+  date: 2018-12-05 15:03:17
+
+CommandeProduit(jeanbontartiflette):
+  produit: tartiflette
+  quantite: 42
+  commande: jeanboncommande
+CommandeProduit(jeanbonraclette):
+  produit: raclette
+  quantite: 11
+  commande: jeanboncommande

@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="@{BackController.index()}">M2iBay</a>
+    <a class="navbar-brand" href="@{admin.Admin.index()}">M2iBay</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,13 +9,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="@{BackController.commandes()}">Commandes</a>
+                <a class="nav-link" href="@{admin.AdminCommande.commandes()}">Commandes</a>
             </li>
             <li class="nav-item">
-                <a href="@{BackController.produits()}" class="nav-link">Produits</a>
+                <a href="@{admin.AdminProduit.produits()}" class="nav-link">Produits</a>
             </li>
             <li>
-                <a class="nav-link" href="@{BackController.utilisateurs()}">Utilisateurs</a>
+                <a class="nav-link" href="@{admin.AdminUtilisateur.utilisateurs()}">Utilisateurs</a>
             </li>
         </ul>
         <ul class="navbar-nav">

@@ -48,6 +48,7 @@ public enum PanierService {
         panier.uuid = Codec.UUID();
         panier.dateCreation = Date.from(Instant.now());
         panier.produits = new HashMap<>();
+        paniers.add(panier);
         return panier;
     }
 }

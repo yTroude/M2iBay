@@ -1,0 +1,13 @@
+#{extends 'publicViews/template.html' /}
+#{set title:'Bienvenue sur M2iBay' /}
+
+#{list produits, as:'produit'}
+<div class="col-sm-3">
+    <div class="card">
+        <div class="card-body">
+            <a href="@{publicControllers.Public.detailProduit(produit.uuid)}"><h5 class="card-title">${produit.nom}</h5></a>
+            <p><a href="@{publicControllers.PublicPanier.addToPanier(produit.uuid, 1)}">Acheter</a> ${ produit.prix.formatCurrency('EUR').raw() }</p>
+        </div>
+    </div>
+</div>
+#{/list}

@@ -1,4 +1,4 @@
-package util;
+package models;
 
 import org.hibernate.annotations.GenericGenerator;
 import play.db.jpa.GenericModel;
@@ -13,6 +13,6 @@ public class UUIDModel extends GenericModel {
     @Id
     @GenericGenerator(name="UUID", strategy = "utils.UUIDGenerator")
     @GeneratedValue(generator = "UUID")
-    @Column(name="uuid", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @Column(name="uuid", updatable = false, nullable = false, length = 36)
     public String uuid;
 }

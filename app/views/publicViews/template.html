@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="@{FrontController.index()}">M2iBay</a>
+    <a class="navbar-brand" href="@{publicControllers.Public.index()}">M2iBay</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,12 +9,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="@{FrontController.afficherPanier()}">Panier</a>
+                <a class="nav-link" href="@{publicControllers.PublicPanier.afficherPanier()}">Panier</a>
             </li>
+            #{secure.check "user"}
+            <li class="nav-item">
+                <a href="@{sessionControllers.ConnectedUserController.afficherCommandes()}" class="nav-link">Mes commandes</a>
+            </li>
+            #{/secure.check}
         </ul>
         <ul class="navbar-nav ">
             <li class="nav-item">
-                <a href="@{BackController.index()}" class="nav-link">Admin</a>
+                <a href="@{admin.Admin.index()}" class="nav-link">Admin</a>
             </li>
         </ul>
     </div>

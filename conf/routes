@@ -2,18 +2,30 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                                       FrontController.index
-GET     /produit/{uuid}/detail                  FrontController.detailProduit
-GET     /panier                                 FrontController.afficherPanier
-GET     /admin                                  BackController.index
-GET     /admin/utilisateurs                     BackController.utilisateurs
-GET     /admin/utilisateurs/{uuid}/detail       BackController.detailUtilisateur
-GET     /admin/produits                         BackController.produits
-POST    /admin/produits                         BackController.creerProduit
-GET     /admin/commandes                        BackController.commandes
-GET     /admin/commandes/{uuid}/detail          BackController.detailCommande
-GET     /admin/produits/nouveau                 BackController.formulaireProduit
+# Secure Imports
+*       /                                       module:secure
+
+
+# Public
+GET     /                                       Public.index
+GET     /produit/{produitUuid}/detail           PublicProduit.detailProduit
+GET     /panier                                 PublicPanier.afficherPanier
+GET     /panier/finaliser                       PublicPanier.finaliserCommande
+GET     /produit/{produitUUID}/acheter          PublicPanier.addToPanier
+POST    /panier/maj                             PublicPanier.updateQuantitePanier
+
+# Connected user
+GET     /commandes                              SessionCommande.afficherCommandes
+
+# Admin
+GET     /admin                                  Admin.index
+GET     /admin/utilisateurs                     AdminUtilisateur.utilisateurs
+GET     /admin/utilisateurs/{uuid}/detail       AdminUtilisateur.detailUtilisateur
+GET     /admin/produits                         AdminProduit.produits
+POST    /admin/produits                         AdminProduit.creerProduit
+GET     /admin/produits/nouveau                 AdminProduit.formulaireProduit
+GET     /admin/commandes                        AdminCommande.commandes
+GET     /admin/commandes/{uuid}/detail          AdminCommande.detailCommande
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -22,4 +34,4 @@ GET     /favicon.ico                            404
 GET     /public/                                staticDir:public
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+# *       /{controller}/{action}                  {controller}.{action}
