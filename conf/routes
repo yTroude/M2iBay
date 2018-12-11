@@ -7,25 +7,28 @@
 
 
 # Public
-GET     /                                       Public.index
-GET     /produit/{produitUuid}/detail           PublicProduit.detailProduit
-GET     /panier                                 PublicPanier.afficherPanier
-GET     /panier/finaliser                       PublicPanier.finaliserCommande
-GET     /produit/{produitUUID}/acheter          PublicPanier.addToPanier
-POST    /panier/maj                             PublicPanier.updateQuantitePanier
+GET     /                                       pub.Public.index
+GET     /produit/{uuid}/detail                  pub.PublicProduit.detailProduit
+GET     /panier                                 pub.PublicPanier.afficherPanier
+GET     /produit/{uuid}/ajoutPanier/{quantite}  pub.PublicPanier.addToPanier
+POST    /produit/ajoutPanier/                   pub.PublicPanier.addToPanier
+POST    /panier/maj                             pub.PublicPanier.updateQuantitePanier
+GET     /panier/{uuid}/supprimer                pub.PublicPanier.supprimerProduitPanier
 
 # Connected user
-GET     /commandes                              SessionCommande.afficherCommandes
+GET     /commandes                              user.Commande.afficherCommandes
+GET     /commande/finaliser                     user.Commande.finaliserCommande
+GET     /commande/soumettre                     user.Commande.submitCommande
 
 # Admin
-GET     /admin                                  Admin.index
-GET     /admin/utilisateurs                     AdminUtilisateur.utilisateurs
-GET     /admin/utilisateurs/{uuid}/detail       AdminUtilisateur.detailUtilisateur
-GET     /admin/produits                         AdminProduit.produits
-POST    /admin/produits                         AdminProduit.creerProduit
-GET     /admin/produits/nouveau                 AdminProduit.formulaireProduit
-GET     /admin/commandes                        AdminCommande.commandes
-GET     /admin/commandes/{uuid}/detail          AdminCommande.detailCommande
+GET     /admin                                  admin.Admin.index
+GET     /admin/utilisateurs                     admin.AdminUtilisateur.utilisateurs
+GET     /admin/utilisateurs/{uuid}/detail       admin.AdminUtilisateur.detailUtilisateur
+GET     /admin/produits                         admin.AdminProduit.produits
+POST    /admin/produits                         admin.AdminProduit.creerProduit
+GET     /admin/produits/nouveau                 admin.AdminProduit.formulaireProduit
+GET     /admin/commandes                        admin.AdminCommande.commandes
+GET     /admin/commandes/{uuid}/detail          admin.AdminCommande.detailCommande
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

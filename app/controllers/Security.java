@@ -1,13 +1,14 @@
 package controllers;
 
-import controllers.publicControllers.Public;
+import controllers.pub.Public;
 import models.Utilisateur;
+import services.ProduitService;
 
 public class Security extends Secure.Security {
 
     static boolean authenticate(String username, String password){
-        Utilisateur utilisateur = Utilisateur.find("byEmail",username).first();
-        if(utilisateur!=null && utilisateur.password.equals(password)){
+        Utilisateur utilisateur = ProduitService.getByEmailAndPassword(username,password);
+        if(utilisateur!=null){
             return true;
         }
         return false;
@@ -16,8 +17,12 @@ public class Security extends Secure.Security {
         Public.index();
     }
     static boolean check(String profile){
-        Utilisateur utilisateur = Utilisateur.find("byEmail", connected()).first();
+        Utilisateur utilisateur = connectedUser();
         return utilisateur.profile.equals(profile);
+    }
+
+    public static Utilisateur connectedUser(){
+        return Utilisateur.find("byEmail",connected()).first();
     }
 
 }

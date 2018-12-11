@@ -1,0 +1,28 @@
+#{extends 'pub/template.html'/}
+#{set title:'Finaliser la commande'/}
+<div class="col">
+    <h1>Finalisation de votre commande</h1>
+
+    <div class="col">
+        <h3>Vos informations :</h3>
+        <p>${utilisateur.prenom}${utilisateur.nom}</p>
+        <p>${utilisateur.email}</p>
+    </div>
+    <div class="col">
+        <h3>Votre commande :</h3>
+    #{list panier.produits.keySet(), as:'produit'}
+        <div class="col">
+            <div class="card">
+                <h5>${produit.nom} : ${panier.produits.get(produit)}</h5>
+                <p>${(produit.prix*panier.produits.get(produit)).formatCurrency('EUR').raw()}</p>
+            </div>
+        </div>
+    #{/list}
+    </div>
+
+    <div class="row">
+        <br>
+        <h4>Tout est correct ? </h4>
+        <a class="btn btn-primary" href="@{user.Commande.submitCommande()}">Soumettre votre commande</a>
+    </div>
+</div>

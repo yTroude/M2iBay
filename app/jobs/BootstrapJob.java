@@ -19,7 +19,7 @@ public class BootstrapJob extends Job {
 
         if(Play.mode.isDev()){
             Fixtures.deleteAllModels();
-            Fixtures.load("initial-data.yml");
+            Fixtures.loadModels("initial-data.yml");
             /*
             //Cree l'utilisateur admin
             Utilisateur admin = new Utilisateur();

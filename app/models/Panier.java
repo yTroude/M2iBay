@@ -2,6 +2,7 @@ package models;
 
 import javassist.NotFoundException;
 import play.Logger;
+import services.ProduitService;
 
 import java.util.Date;
 import java.util.Map;
@@ -11,12 +12,12 @@ public class Panier {
     public Map<Produit,Integer> produits;   
     public Date dateCreation;
 
-    public void addProduit(Produit produit, Integer quantite) throws NotFoundException {
+    public void addProduit(Produit produit, Integer quantite)  {
         Integer newQuantite = produits.getOrDefault(produit,0)+quantite;
         updateProduit(produit, newQuantite);
     }
 
-    public void updateProduit(Produit produit, Integer quantite) throws NotFoundException,IndexOutOfBoundsException {
+    public void updateProduit(Produit produit, Integer quantite) {
         if (produits.containsKey(produit)){
             if(quantite == 0){
                 produits.remove(produit);
@@ -24,16 +25,13 @@ public class Panier {
             else if (quantite>0){
                 produits.replace(produit, quantite);
             }
-            else throw(new IndexOutOfBoundsException());
         }
         else {
             produits.put(produit,quantite);
         }
-
     }
 
-    public void removeProduit(String produitUuid){
-        Produit produit = Produit.findById(produitUuid);
+    public void removeProduit(Produit produit){
         produits.remove(produit);
     }
 

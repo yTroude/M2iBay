@@ -1,14 +1,14 @@
-#{extends 'publicViews/template.html'/}
+#{extends 'pub/template.html'/}
 #{set title:produit.nom/}
 
 <div class="col">
     <h2>${produit.nom}</h2>
     <p>${produit.description}</p>
-    <form method="post" action="@{publicControllers.PublicPanier.addToPanier()}">
+    <form method="post" action="@{pub.PublicPanier.addToPanier()}">
         <div class="form-group">
             <label for="quantite">Quantité</label>
+            <input type="hidden" name="uuid" id="uuid" value="${produit.uuid}">
             <input type="number" name="quantite" id="quantite" min="0">
-            <input type="hidden" name="produitUUID", value="${produit.uuid}">
             <input type="submit" class="btn btn-primary" value="Ajouter au panier">
         </div>
     </form>

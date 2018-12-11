@@ -60,4 +60,11 @@ public class Commande extends UUIDModel {
         return null;
     }
 
+    public void addProduitsFromPanier(Panier panier){
+        for (Map.Entry<Produit,Integer> entry: panier.produits.entrySet()) {
+            CommandeProduit cp = new CommandeProduit(this,entry.getKey(),entry.getValue());
+            this.commandeProduits.add(cp);
+        }
+    }
+
 }

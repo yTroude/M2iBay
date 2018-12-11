@@ -3,6 +3,7 @@ package services;
 import models.Panier;
 import play.Logger;
 import play.libs.Codec;
+import play.mvc.Controller;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -19,10 +20,6 @@ public enum PanierService {
 
     public void initialize(){
         paniers = new ArrayList<>();
-    }
-
-    public void addPanier(Panier panier){
-        paniers.add(panier);
     }
 
     public void clean(){
@@ -49,6 +46,14 @@ public enum PanierService {
         panier.dateCreation = Date.from(Instant.now());
         panier.produits = new HashMap<>();
         paniers.add(panier);
+        return panier;
+    }
+
+    public static Panier getOrCreatePanier(String uuid){
+        Panier panier = INSTANCE.getPanierByUUID(uuid);
+        if (panier == null){
+            panier = INSTANCE.newPanier();
+        }
         return panier;
     }
 }
